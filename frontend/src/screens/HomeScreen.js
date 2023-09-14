@@ -11,7 +11,6 @@ const HomeScreen = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [pdfData, setPdfData] = useState({});
-  const [packageValidBoolean, setPackageValidBoolean] = useState(false);
   const [message, setMessage] = useState("");
   const [origenNombre, setOrigenNombre] = useState("");
   const [origenTelefono, setOrigenTelefono] = useState("");
@@ -156,11 +155,7 @@ const HomeScreen = () => {
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.post(
-          "/api/shipment",
-          shipmentData,
-          config
-        );
+        await axios.post("/api/shipment", shipmentData, config);
 
         window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -409,7 +404,7 @@ const HomeScreen = () => {
               onChange={(e) => setOrigenComentario(e.target.value)}
             />
           </InputGroup>
-          {!packageValidBoolean && message.length > 1 && (
+          {message.length > 1 && (
             <Container className="mt-3">
               <Message
                 text={message}
